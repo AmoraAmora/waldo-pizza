@@ -15,6 +15,7 @@ const Cart = () => {
                 <div className={style.total_title}>total</div>
                 <div className={style.total_title}>{totalPrice}</div>
             </div>}
+            {!totalPrice && <div className={style.nothing}>your pizza cart is empty</div>}
         </div>
     )
 }
