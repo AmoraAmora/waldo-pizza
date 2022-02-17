@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { useOrder } from "../../OrderContext"
 import { pizzaSizes, pizzaToppingConnection } from "../interfaces"
 import style from "../style.module.css"
 import ToppingItem from "../ToppingItem"
@@ -6,13 +7,13 @@ import ToppingItem from "../ToppingItem"
 const PizzaItem = ({el}: {el: pizzaSizes}) => {
     const [state, setState] = useState<pizzaSizes>(el)
     const [count, setCount] = useState<pizzaToppingConnection[]>([])
+    const { onAdd } = useOrder()
     useState(()=>{
         const count1 = el.toppings.filter((el) => el.defaultSelected === true)
         setCount(el.toppings.filter((el) => el.defaultSelected === true))
         setState({...state, maxToppings: state.maxToppings === null ? state.maxToppings : state.maxToppings  - count1.length})
     // @ts-ignore
     }, [])
-    console.log(count, state.maxToppings)
     const click = (id: number) => {
         if (state.maxToppings === null) {
             const newTopings = state?.toppings.map((item, i) => {
@@ -87,7 +88,6 @@ const PizzaItem = ({el}: {el: pizzaSizes}) => {
                     return item
                 }).map((item, i) => {
                     if (item.topping.name === count![0].topping.name) {
-                        setCount(count.splice(0,1))
                         return {
                             ...item,
                             defaultSelected: !item.defaultSelected
@@ -98,10 +98,15 @@ const PizzaItem = ({el}: {el: pizzaSizes}) => {
                 setState({...state,
                     toppings: newTopings
                 })
-                setCount([...count, state.toppings[id]])
+                const add = [...count]
+                add.push(state.toppings[id])
+                add.splice(0,1)
+                setCount(add)
             }
         }
+        return
     }
+    console.log(count, state.maxToppings)
     return (
         <div className={style.container}>
             <div className={style.title}>{state?.name}</div>
@@ -112,7 +117,7 @@ const PizzaItem = ({el}: {el: pizzaSizes}) => {
             </div>
             <div className={style.title_container}>
                 <div className={style.price}>${(state?.basePrice + state.toppings.map((el)=>el.defaultSelected ? el.topping.price : 0).reduce((total, amount) => total + amount)).toFixed(2)}</div>
-                <div className={style.price}>add to card</div>
+                <div className={style.button} onClick={()=>{onAdd(state)}}>add to card</div>
             </div>
         </div>
     )

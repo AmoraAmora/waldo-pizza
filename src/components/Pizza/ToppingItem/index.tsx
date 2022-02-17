@@ -9,9 +9,9 @@ const ToppingItem = ({el, onClick , id}: {el: pizzaToppingConnection, onClick:(i
         {/* @ts-ignore */}
         <div className={style.tag} style={{background: el.defaultSelected ? COLOR[el.topping.name] : '#eff0f5'}} onClick={()=>onClick(id)}>
             {/* @ts-ignore */}
-             <span>{EMOGI[el.topping.name]}</span>
-            <span>{el.topping.name}</span>
-            <span className={style.tag_price}>${el.topping.price}</span>
+            <span>{EMOGI[el.topping.name]}</span>
+            <span className={el.defaultSelected ? style.tag_name_checked :  style.tag_name}>{el.topping.name}</span>
+            <span className={el.defaultSelected ? style.tag_price_checked :  style.tag_price}>${el.topping.price}</span>
         </div>
         </>
     )
