@@ -12,9 +12,9 @@ const CartItem = ({el, id}: {el: order, id: number}) => {
             <div className={style.title_container}>
                 <span className={style.title}>{el.name} pizza</span>
                 <div className={style.icon_container}>
-                    {el.toppings.map((el)=>{
+                    {el.toppings.map((el, i)=>{
                         /* @ts-ignore */
-                        if (el.defaultSelected) {return <div className={style.icon}>{EMOGI[el.topping.name]}</div>}
+                        if (el.defaultSelected) {return <div key={i}  className={style.icon}>{EMOGI[el.topping.name]}</div>}
                         else return null
                     })}
                 </div>
