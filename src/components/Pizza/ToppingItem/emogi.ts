@@ -1,19 +1,12 @@
-export const EMOGI = {
-    "onion": '🧅',
-    "green olives": '🍈',
-    "bell peps":'🍅',
-    "cheese":'🧀',
-    "sausage":'🥓',
-    "pepperoni":'🍕',
-    "bannana peps":'🌶️',
-}
-
-export const COLOR = {
-    "onion": '#E5CE2A ',
-    "green olives": '#DAF7A6',
-    "bell peps":'#FB4018',
-    "cheese":'#FFC300',
-    "sausage":'#F88968',
-    "pepperoni":'#C70039',
-    "bannana peps":'#FC2A36',
-}
+export const getEmogi = (name: string) => {
+  switch (name) {
+    case 'onion': return '🧅';
+    case 'green olives': return '🍈';
+    case 'bell peps': return '🍅';
+    case 'cheese': return '🧀';
+    case 'sausage': return '🥓';
+    case 'pepperoni': return '🍕';
+    case 'banana peps': return '🌶️';
+    default: return null;
+  }
+};
