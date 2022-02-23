@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
-import { pizzaToppingConnection } from '../interfaces'
+import { GetToppingsFieldsFragment } from '../../../generated/graphql'
 
 export interface ToppingItemProps {
-    el: pizzaToppingConnection
+    el: GetToppingsFieldsFragment
     onClick: ((i: number) => void)
     id: number
 }

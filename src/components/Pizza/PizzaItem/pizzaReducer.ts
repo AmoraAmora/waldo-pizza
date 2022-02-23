@@ -1,4 +1,4 @@
-import { pizzaToppingConnection } from '../interfaces'
+import { GetToppingsFieldsFragment } from '../../../generated/graphql'
 
 export const UNLIMITED_CHANGE: 'UNLIMITED_CHANGE' = 'UNLIMITED_CHANGE'
 export const UNSELECT_WITH_LIMIT: 'UNSELECT_WITH_LIMIT' = 'UNSELECT_WITH_LIMIT'
@@ -10,8 +10,8 @@ interface IState {
     name: string
     maxToppings: number
     basePrice: number
-    toppings: pizzaToppingConnection[]
-    count: pizzaToppingConnection[]
+    toppings: GetToppingsFieldsFragment[]
+    count: GetToppingsFieldsFragment[]
 }
 
 interface IAction {

@@ -1,13 +1,17 @@
+fragment GetToppingsFields on pizzaToppingConnection {
+  topping {
+    name
+    price
+    }
+  defaultSelected
+}
+
 fragment GetPizzaFields on pizzaSize {
     name
     maxToppings
     basePrice
     toppings {
-        topping {
-          name
-          price
-        }
-        defaultSelected
+        ...GetToppingsFields
     }
 }
 

@@ -1,17 +1,11 @@
 /* eslint-disable no-unused-vars */
-interface pizzaToppingConnection {
-    defaultSelected: boolean
-    topping: {
-        name: string
-        price: number
-    }
-}
+import { GetToppingsFieldsFragment } from '../../generated/graphql'
 
 export interface order{
     name: string
     maxToppings: number | null
     basePrice: number
-    toppings: pizzaToppingConnection[]
+    toppings: GetToppingsFieldsFragment[]
 }
 
 export type OrdersType = {
