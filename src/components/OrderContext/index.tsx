@@ -10,6 +10,11 @@ const getTotal = (el: order) => {
   return (basePrice + selectedToppingsTotalPrice)
 }
 
+const getOrdersTotal = (orders: order[]) => {
+  const ordersSum = orders.map((el) => getTotal(el)).reduce((sum, amount) => sum + amount)
+  return ordersSum.toFixed(2)
+}
+
 const defaultValue = {
   orders: [],
   totalPrice: '',
@@ -26,7 +31,7 @@ export function OrderProvider({ children }: { children: ReactNode }) {
   const [total, setTotal] = useState('0')
 
   useEffect(() => {
-    const sumOfOrders = orders.length !== 0 ? orders.map((el) => getTotal(el)).reduce((sum, amount) => sum + amount).toFixed(2) : ''
+    const sumOfOrders = orders.length !== 0 ? getOrdersTotal(orders) : ''
     setTotal(sumOfOrders)
   }, [orders])
 

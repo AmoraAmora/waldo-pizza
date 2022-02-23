@@ -1,12 +1,11 @@
-import { gql } from '@apollo/client'
-import * as Apollo from '@apollo/client'
-
-export type Maybe<T> = T | null;
-export type InputMaybe<T> = Maybe<T>;
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
+export type Maybe<T> = T;
+export type InputMaybe<T> = T;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions = {} as const
+const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -23,7 +22,6 @@ export enum PizzaSizes {
 }
 
 export type PizzaSize = {
-  __typename: 'pizzaSize';
   /** Base price of the pie - sans toppings */
   basePrice: Scalars['Float'];
   /** Max number of allowable toppings. */
@@ -35,17 +33,13 @@ export type PizzaSize = {
 };
 
 export type PizzaToppingConnection = {
-  __typename: 'pizzaToppingConnection';
   /** whether or not this topping should be selected by default for this pizza */
   defaultSelected: Scalars['Boolean'];
-  /** The pizza size */
-  pizzaSize: PizzaSize;
   /** The topping */
   topping: Topping;
 };
 
 export type Query = {
-  __typename: 'query';
   /** Pizza size by name */
   pizzaSizeByName: Maybe<PizzaSize>;
   /** All available pizza sizes */
@@ -58,7 +52,6 @@ export type QueryPizzaSizeByNameArgs = {
 };
 
 export type Topping = {
-  __typename: 'topping';
   /** The name of the topping */
   name: Scalars['String'];
   /** How much this topping costs */
@@ -68,7 +61,7 @@ export type Topping = {
 export type GetPizzaQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPizzaQuery = { __typename: 'query', pizzaSizes: Array<{ __typename: 'pizzaSize', name: string, maxToppings: number | null, basePrice: number, toppings: Array<{ __typename: 'pizzaToppingConnection', defaultSelected: boolean, topping: { __typename: 'topping', name: string, price: number } } | null> } | null> };
+export type GetPizzaQuery = { pizzaSizes: Array<{ name: string, maxToppings: number, basePrice: number, toppings: Array<{ defaultSelected: boolean, topping: { name: string, price: number } }> }> };
 
 
 export const GetPizzaDocument = gql`
@@ -86,7 +79,7 @@ export const GetPizzaDocument = gql`
     }
   }
 }
-    `
+    `;
 
 /**
  * __useGetPizzaQuery__
@@ -105,11 +98,11 @@ export const GetPizzaDocument = gql`
  */
 export function useGetPizzaQuery(baseOptions?: Apollo.QueryHookOptions<GetPizzaQuery, GetPizzaQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetPizzaQuery, GetPizzaQueryVariables>(GetPizzaDocument, options)
+        return Apollo.useQuery<GetPizzaQuery, GetPizzaQueryVariables>(GetPizzaDocument, options);
       }
 export function useGetPizzaLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPizzaQuery, GetPizzaQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetPizzaQuery, GetPizzaQueryVariables>(GetPizzaDocument, options)
+          return Apollo.useLazyQuery<GetPizzaQuery, GetPizzaQueryVariables>(GetPizzaDocument, options);
         }
 export type GetPizzaQueryHookResult = ReturnType<typeof useGetPizzaQuery>;
 export type GetPizzaLazyQueryHookResult = ReturnType<typeof useGetPizzaLazyQuery>;
