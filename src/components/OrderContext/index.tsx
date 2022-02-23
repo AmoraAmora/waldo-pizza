@@ -3,15 +3,17 @@ import React, {
 } from 'react'
 import { order, OrdersType } from './intefaces'
 
-const getTotal = (el: order) => {
-  const { basePrice, toppings } = el
+const getTotal = (orderData: order) => {
+  const { basePrice, toppings } = orderData
   const pricesOfToppings = toppings.map((item) => (item.defaultSelected ? item.topping.price : 0))
   const selectedToppingsTotalPrice = pricesOfToppings.reduce((total, amount) => total + amount)
+
   return (basePrice + selectedToppingsTotalPrice)
 }
 
 const getOrdersTotal = (orders: order[]) => {
   const ordersSum = orders.map((el) => getTotal(el)).reduce((sum, amount) => sum + amount)
+
   return ordersSum.toFixed(2)
 }
 

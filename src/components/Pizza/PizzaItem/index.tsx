@@ -11,10 +11,11 @@ import {
   UNSELECT_WITH_LIMIT,
 } from './pizzaReducer'
 
-const getTotal = (el: GetPizzaFieldsFragment) => {
-  const { basePrice, toppings } = el
+const getTotal = (pizzaData: GetPizzaFieldsFragment) => {
+  const { basePrice, toppings } = pizzaData
   const pricesOfToppings = toppings.map((item) => (item.defaultSelected ? item.topping.price : 0))
   const selectedToppingsTotalPrice = pricesOfToppings.reduce((total, amount) => total + amount)
+
   return (basePrice + selectedToppingsTotalPrice).toFixed(2)
 }
 
@@ -26,13 +27,14 @@ const getInitialState = (initialPizza: GetPizzaFieldsFragment) => {
     : initialPizza.maxToppings - count.length
   const { basePrice } = initialPizza
   const { toppings } = initialPizza
+
   return {
     count, name, maxToppings, basePrice, toppings,
   }
 }
 
-function PizzaItem({ el }: {el: GetPizzaFieldsFragment}) {
-  const [state, dispatch] = useReducer(pizzaReducer, getInitialState(el))
+function PizzaItem({ pizza }: {pizza: GetPizzaFieldsFragment}) {
+  const [state, dispatch] = useReducer(pizzaReducer, getInitialState(pizza))
   const { onAdd } = useOrder()
 
   const handleClick = (id: number) => {
@@ -73,6 +75,7 @@ function PizzaItem({ el }: {el: GetPizzaFieldsFragment}) {
     const {
       name, toppings, maxToppings, basePrice,
     } = state
+
     return {
       name, toppings, maxToppings, basePrice,
     }
@@ -84,7 +87,14 @@ function PizzaItem({ el }: {el: GetPizzaFieldsFragment}) {
       <div className={style.tag_container}>
         {state
           ?.toppings
-          .map((item, i) => <ToppingItem el={item} key={i} onClick={handleClick} id={i} />)}
+          .map((item, i) => (
+            <ToppingItem
+              toppingData={item}
+              key={i}
+              onClick={handleClick}
+              id={i}
+            />
+          ))}
       </div>
       <div className={style.title_container}>
         <div className={style.price}>

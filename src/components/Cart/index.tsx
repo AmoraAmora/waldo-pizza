@@ -5,9 +5,10 @@ import style from './style.module.css'
 
 function Cart() {
   const { orders, totalPrice } = useOrder()
+
   return (
     <div className={style.main}>
-      {orders.map((el, i) => <CartItem key={i} el={el} id={i} />)}
+      {orders.map((el, i) => <CartItem key={i} сartData={el} orderId={i} />)}
       {totalPrice && <div className={style.hr} /> }
       {totalPrice && (
       <div className={style.total_container}>

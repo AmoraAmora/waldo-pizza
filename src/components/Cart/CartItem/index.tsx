@@ -4,26 +4,28 @@ import { useOrder } from '../../OrderContext'
 import style from '../style.module.css'
 import { getEmogi } from '../../Pizza/ToppingItem/emogi'
 
-const getTotal = (el: order) => {
-  const { basePrice, toppings } = el
+const getTotal = (orderData: order) => {
+  const { basePrice, toppings } = orderData
   const pricesOfToppings = toppings.map((item) => (item.defaultSelected ? item.topping.price : 0))
   const selectedToppingsTotalPrice = pricesOfToppings.reduce((total, amount) => total + amount)
+
   return (basePrice + selectedToppingsTotalPrice).toFixed(2)
 }
 
-function CartItem({ el, id }: {el: order, id: number}) {
+function CartItem({ сartData, orderId }: {сartData: order, orderId: number}) {
   const { onDelete } = useOrder()
-  const total = getTotal(el)
+  const total = getTotal(сartData)
+
   return (
     <div className={style.container}>
       <div className={style.title_container}>
         <span className={style.title}>
-          {el.name}
+          {сartData.name}
           {' '}
           pizza
         </span>
         <div className={style.icon_container}>
-          {el.toppings.map((item, i) => {
+          {сartData.toppings.map((item, i) => {
             if (item.defaultSelected) {
               return <div key={i} className={style.icon}>{getEmogi(item.topping.name)}</div>
             }
@@ -36,7 +38,7 @@ function CartItem({ el, id }: {el: order, id: number}) {
         </span>
       </div>
       <div className={style.end}>
-        <div className={style.icon_button} onClick={() => onDelete(id)}>✖️</div>
+        <div className={style.icon_button} onClick={() => onDelete(orderId)}>✖️</div>
       </div>
     </div>
   )

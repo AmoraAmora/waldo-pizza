@@ -2,7 +2,7 @@
 import { GetToppingsFieldsFragment } from '../../../generated/graphql'
 
 export interface ToppingItemProps {
-    el: GetToppingsFieldsFragment
+    toppingData: GetToppingsFieldsFragment
     onClick: ((i: number) => void)
     id: number
 }
