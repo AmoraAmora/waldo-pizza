@@ -8,7 +8,7 @@ export const SELECT_WITH_EMPTY_LIMIT: 'SELECT_WITH_EMPTY_LIMIT' = 'SELECT_WITH_E
 
 interface IState {
     name: string
-    maxToppings: number | null
+    maxToppings: number
     basePrice: number
     toppings: pizzaToppingConnection[]
     count: pizzaToppingConnection[]

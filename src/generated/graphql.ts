@@ -35,6 +35,8 @@ export type PizzaSize = {
 export type PizzaToppingConnection = {
   /** whether or not this topping should be selected by default for this pizza */
   defaultSelected: Scalars['Boolean'];
+  /** The pizza size */
+  pizzaSize: PizzaSize;
   /** The topping */
   topping: Topping;
 };
@@ -58,28 +60,34 @@ export type Topping = {
   price: Scalars['Float'];
 };
 
+export type GetPizzaFieldsFragment = { name: string, maxToppings: number, basePrice: number, toppings: Array<{ defaultSelected: boolean, topping: { name: string, price: number } }> };
+
 export type GetPizzaQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetPizzaQuery = { pizzaSizes: Array<{ name: string, maxToppings: number, basePrice: number, toppings: Array<{ defaultSelected: boolean, topping: { name: string, price: number } }> }> };
 
-
-export const GetPizzaDocument = gql`
-    query getPizza {
-  pizzaSizes {
-    name
-    maxToppings
-    basePrice
-    toppings {
-      topping {
-        name
-        price
-      }
-      defaultSelected
+export const GetPizzaFieldsFragmentDoc = gql`
+    fragment GetPizzaFields on pizzaSize {
+  name
+  maxToppings
+  basePrice
+  toppings {
+    topping {
+      name
+      price
     }
+    defaultSelected
   }
 }
     `;
+export const GetPizzaDocument = gql`
+    query getPizza {
+  pizzaSizes {
+    ...GetPizzaFields
+  }
+}
+    ${GetPizzaFieldsFragmentDoc}`;
 
 /**
  * __useGetPizzaQuery__

@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react'
+import { GetPizzaFieldsFragment } from '../../../generated/graphql'
 import { useOrder } from '../../OrderContext'
-import { pizzaSizes } from '../interfaces'
 import style from '../style.module.css'
 import ToppingItem from '../ToppingItem'
 import {
@@ -11,14 +11,14 @@ import {
   UNSELECT_WITH_LIMIT,
 } from './pizzaReducer'
 
-const getTotal = (el: pizzaSizes) => {
+const getTotal = (el: GetPizzaFieldsFragment) => {
   const { basePrice, toppings } = el
   const pricesOfToppings = toppings.map((item) => (item.defaultSelected ? item.topping.price : 0))
   const selectedToppingsTotalPrice = pricesOfToppings.reduce((total, amount) => total + amount)
   return (basePrice + selectedToppingsTotalPrice).toFixed(2)
 }
 
-const getInitialState = (initialPizza: pizzaSizes) => {
+const getInitialState = (initialPizza: GetPizzaFieldsFragment) => {
   const count = initialPizza.toppings.filter((item) => item.defaultSelected === true)
   const { name } = initialPizza
   const maxToppings = initialPizza.maxToppings === null
@@ -31,7 +31,7 @@ const getInitialState = (initialPizza: pizzaSizes) => {
   }
 }
 
-function PizzaItem({ el }: {el: pizzaSizes}) {
+function PizzaItem({ el }: {el: GetPizzaFieldsFragment}) {
   const [state, dispatch] = useReducer(pizzaReducer, getInitialState(el))
   const { onAdd } = useOrder()
 

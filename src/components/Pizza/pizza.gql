@@ -1,14 +1,18 @@
-query getPizza {
-    pizzaSizes {
-      name
-      maxToppings
-      basePrice
-      toppings {
+fragment GetPizzaFields on pizzaSize {
+    name
+    maxToppings
+    basePrice
+    toppings {
         topping {
           name
           price
         }
         defaultSelected
-      }
+    }
+}
+
+query getPizza {
+    pizzaSizes {
+      ...GetPizzaFields
     }
 }
