@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { pizzaToppingConnection } from '../interfaces';
+import { pizzaToppingConnection } from '../interfaces'
 
 export interface ToppingItemProps {
     el: pizzaToppingConnection

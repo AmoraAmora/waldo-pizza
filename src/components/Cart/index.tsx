@@ -1,10 +1,10 @@
-import React from 'react';
-import { useOrder } from '../OrderContext';
-import CartItem from './CartItem';
-import style from './style.module.css';
+import React from 'react'
+import { useOrder } from '../OrderContext'
+import CartItem from './CartItem'
+import style from './style.module.css'
 
 function Cart() {
-  const { orders, totalPrice } = useOrder();
+  const { orders, totalPrice } = useOrder()
   return (
     <div className={style.main}>
       {orders.map((el, i) => <CartItem key={i} el={el} id={i} />)}
@@ -17,7 +17,7 @@ function Cart() {
       )}
       {!totalPrice && <div className={style.nothing}>your pizza cart is empty</div>}
     </div>
-  );
+  )
 }
 
-export default Cart;
+export default Cart

@@ -1,8 +1,8 @@
-import React from 'react';
-import Cart from '../Cart';
-import { OrderProvider } from '../OrderContext';
-import Pizzas from '../Pizza';
-import style from './style.module.css';
+import React from 'react'
+import Cart from '../Cart'
+import { OrderProvider } from '../OrderContext'
+import Pizzas from '../Pizza'
+import style from './style.module.css'
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         </div>
       </OrderProvider>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

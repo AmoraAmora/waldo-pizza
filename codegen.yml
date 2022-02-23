@@ -1,0 +1,24 @@
+overwrite: true
+schema:
+  - 'https://core-graphql.dev.waldo.photos/pizza'
+documents: 'src/**/*.gql'
+generates:
+  introspection.json:
+    plugins:
+      - 'introspection'
+
+  src/generated/graphql.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+    config:
+      avoidOptionals: true
+      nonOptionalTypename: true
+      withComponent: false
+      withHOC: false
+      withHooks: true
+      withMutationFn: true
+      exportFragmentSpreadSubTypes: true
+      preResolveTypes: true
+      reactApolloVersion: 3

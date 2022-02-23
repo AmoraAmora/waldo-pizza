@@ -1,7 +1,4 @@
-import { gql } from '@apollo/client'
-
-export const GET_PIZZA = gql`
-  query getPizza {
+query getPizza {
     pizzaSizes {
       name
       maxToppings
@@ -14,5 +11,4 @@ export const GET_PIZZA = gql`
         defaultSelected
       }
     }
-  }
-`
+}
