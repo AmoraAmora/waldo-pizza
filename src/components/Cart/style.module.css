@@ -67,10 +67,6 @@
     cursor: pointer;
 }
 
-.icon_button:hover{
-    background-color: #FC2A36;
-}
-
 .icon_container{
     display: flex;
     gap: 10px;

@@ -36,7 +36,7 @@ function CartItem({ el, id }: {el: order, id: number}) {
         </span>
       </div>
       <div className={style.end}>
-        <button type="button" className={style.icon_button} onClick={() => onDelete(id)}>✖️</button>
+        <div className={style.icon_button} onClick={() => onDelete(id)}>✖️</div>
       </div>
     </div>
   )
